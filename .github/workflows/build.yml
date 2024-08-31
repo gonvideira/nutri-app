@@ -39,3 +39,10 @@ jobs:
         env:
           REACT_APP_AIRTABLE_API: ${{ secrets.AIRTABLE_API }}
           REACT_APP_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          REACT_APP_APIKEY: ${{ secrets.APIKEY }}
+          REACT_APP_AUTHDOMAIN: ${{ secrets.AUTHDOMAIN }}
+          REACT_APP_PROJECTID: ${{ secrets.PROJECTID }}
+          REACT_APP_STORAGEBUCKET: ${{ secrets.STORAGEBUCKET }}
+          REACT_APP_MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
+          REACT_APP_APPID: ${{ secrets.APPID }}
+          REACT_APP_MEASUREMENTID: ${{ secrets.MEASUREMENTID }}
