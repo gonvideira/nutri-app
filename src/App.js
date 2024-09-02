@@ -8,8 +8,9 @@ import Dashboard from './components/Dashboard'
 
 function App() {
   return (
-    <Layout>
-      <Router>
+
+    <Router>
+      <Layout>
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -17,8 +18,9 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </div>
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
+
   );
 }
 

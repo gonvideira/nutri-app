@@ -1,9 +1,15 @@
 import React from 'react';
 import { auth } from '../utilities/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
 
   return (
     <nav>
@@ -14,7 +20,7 @@ function Navbar() {
             <li><a href="/">Link 1</a></li>
             <li><a href="/">Link 2</a></li>
             {!user && (
-              <li><a href="/#/login">Join now</a></li>
+              <li><button onClick={handleLoginClick}>Join now</button></li>
             )}
             {user && (
               <li>
