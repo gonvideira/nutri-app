@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/nutri-app/static/css/main.16cefe98.css",
-    "main.js": "/nutri-app/static/js/main.7db30e0b.js",
+    "main.css": "/nutri-app/static/css/main.70331c4d.css",
+    "main.js": "/nutri-app/static/js/main.75e80bd7.js",
     "index.html": "/nutri-app/index.html",
-    "main.16cefe98.css.map": "/nutri-app/static/css/main.16cefe98.css.map",
-    "main.7db30e0b.js.map": "/nutri-app/static/js/main.7db30e0b.js.map"
+    "main.70331c4d.css.map": "/nutri-app/static/css/main.70331c4d.css.map",
+    "main.75e80bd7.js.map": "/nutri-app/static/js/main.75e80bd7.js.map"
   },
   "entrypoints": [
-    "static/css/main.16cefe98.css",
-    "static/js/main.7db30e0b.js"
+    "static/css/main.70331c4d.css",
+    "static/js/main.75e80bd7.js"
   ]
 }
