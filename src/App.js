@@ -9,7 +9,7 @@ import Dashboard from './components/Dashboard'
 function App() {
   return (
 
-    <Router basename="/nutri-app">
+    <Router>
       <Layout>
         <div>
           <Routes>
