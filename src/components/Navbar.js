@@ -20,7 +20,7 @@ function Navbar() {
             <li><a href="/">Link 1</a></li>
             <li><a href="/">Link 2</a></li>
             {!user && (
-              <li><button onClick={handleLoginClick}>Join now</button></li>
+              <li><button className="waves-effect waves-teal btn-flat white-text avatar-link" onClick={handleLoginClick}>Join now</button></li>
             )}
             {user && (
               <li>
