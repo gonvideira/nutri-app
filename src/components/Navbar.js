@@ -3,7 +3,7 @@ import { auth } from '../utilities/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Navbar() {
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   return (
     <nav>
