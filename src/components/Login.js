@@ -1,13 +1,14 @@
 import React from "react";
 import { GrGoogle } from "react-icons/gr";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useNavigate } from "react-router-dom"; // To navigate after login
+import { useNavigate, useLocation } from "react-router-dom"; // To navigate after login
 import { auth } from '../utilities/firebase';
 import { base } from '../utilities/airtable';
 
 function Login() {
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const GoogleLogin = async () => {
     try {
@@ -40,7 +41,8 @@ function Login() {
       }
 
       // Redirect to the dashboard
-      navigate("/dashboard");
+      const basePath = location.pathname.startsWith("/nutri-app") ? "/nutri-app" : "";
+      navigate(`${basePath}/#/dashboard`);
 
     } catch (error) {
       console.log(`Error: ${error}`);
