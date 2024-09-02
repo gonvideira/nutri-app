@@ -25,16 +25,15 @@ function Login() {
       } else {
         // If the user does not exist, create a new record
         const newRecord = base('Nutritionists').create({
-          'fields': {
-            "Google uid": user.uid,
-            "First Name": user.displayName,
-            "Email": user.email,
-            "Profile Picture": [
-              {
-                "url": user.photoURL
-              }
-            ]
-          }
+          "Google uid": user.uid,
+          "First Name": user.displayName.split(' ')[0],
+          "Last Name": user.displayName.split(' ')[1] || ' ',
+          "Email": user.email,
+          "Profile Picture": [
+            {
+              "url": user.photoURL
+            }
+          ]
         });
         console.log("New user created in Airtable:", newRecord.fields);
       }
@@ -43,6 +42,8 @@ function Login() {
       console.log(`Error: ${error}`);
     }
   }
+
+  // "Unknown field name: \"fields\""
 
   return (
     <div className="container">
