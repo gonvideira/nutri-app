@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/Home';
 import Layout from './components/Layout';
 import Login from './components/Login';
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/auth/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </div>
       </Router>

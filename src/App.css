@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+/* Ensure the avatar image aligns with the navbar height */
+.avatar-link {
+  display: flex;
+  align-items: center; /* Center-aligns the image vertically */
+  height: 100%;
+}
+
+.avatar-img {
+  height: 40px; /* Adjust this value to match the navbar height */
+  width: 40px;  /* Make sure the image stays proportional */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px; /* Optional: adds some space between links and image */
+  vertical-align: middle; /* Ensures the image aligns properly within its container */
+}
