@@ -2,13 +2,8 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="page-footer">
-      <div className="container center">
-        <div className="row">
+    <footer className="page-footer center">
           © 2024 Gonçalo Videira
-        </div>
-      </div>
-
     </footer>
   );
 }

@@ -17,8 +17,6 @@ function Navbar() {
         <div className="container">
           <Link to="/" className="brand-logo">Nutri App</Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><a href="/">Link 1</a></li>
-            <li><a href="/">Link 2</a></li>
             {!user && (
               <li><button className="waves-effect waves-teal btn-flat white-text" onClick={handleLoginClick}>Join now</button></li>
             )}

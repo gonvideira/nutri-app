@@ -4,13 +4,18 @@ import Footer from './Footer';  // Adjust the path as needed
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="container">
-        {children}
+      <div className="row">
+        <div className="col s3 grey">
+          <p>bar</p>
+        </div>
+        <div className="row s9 teal">
+          {children}
+        </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

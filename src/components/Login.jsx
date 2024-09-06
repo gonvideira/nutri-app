@@ -1,11 +1,13 @@
-import React from "react";
+import {React, useContext} from "react";
 import { GrGoogle } from "react-icons/gr";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // To navigate after login
 import { auth } from '../utilities/firebase';
 import { base } from '../utilities/airtable';
+import { UserContext } from '../utilities/context';
 
 function Login() {
+  const { setUserData } = useContext(UserContext);
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
@@ -21,7 +23,8 @@ function Login() {
       }).firstPage();
 
       if (records.length > 0) {
-        console.log("User exists in Airtable:", records[0].fields);
+        console.log("User exists in Airtable:", records[0].getId());
+        setUserData(records[0]);
       } else {
         // If the user does not exist, create a new record
         const newRecord = base('Nutritionists').create({
@@ -35,7 +38,8 @@ function Login() {
             }
           ]
         });
-        console.log("New user created in Airtable:", newRecord.fields);
+        console.log("New user created in Airtable:", newRecord.getId());
+        setUserData(newRecord);
       }
       navigate('/dashboard');
     } catch (error) {
@@ -43,10 +47,8 @@ function Login() {
     }
   }
 
-  // "Unknown field name: \"fields\""
-
   return (
-    <div className="container">
+    <>
       <h3>Join us today!</h3>
       <h5>Sign in with one of the options below:</h5>
       <div className="section">
@@ -66,7 +68,7 @@ function Login() {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
