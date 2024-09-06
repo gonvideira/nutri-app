@@ -1,22 +1,30 @@
-import React from 'react';
-import Navbar from './Navbar';  // Adjust the path as needed
-import Footer from './Footer';  // Adjust the path as needed
+import React from 'react'
+import Navbar from './Navbar';
+import Footer from './Footer';
 
-const Layout = ({ children }) => {
+function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <div className="row">
-        <div className="col s3 grey">
-          <p>bar</p>
-        </div>
-        <div className="row s9 teal">
-          {children}
+
+      <div className="container-fluid">
+        <div className="row">
+          
+          <div className="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <p>bar</p>
+          </div>
+
+          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            {children}
+          </main>
+
         </div>
       </div>
+      
       <Footer />
+    
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

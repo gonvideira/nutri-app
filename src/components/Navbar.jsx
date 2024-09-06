@@ -12,26 +12,46 @@ function Navbar() {
   };
 
   return (
-    <nav>
-      <div className="nav-wrapper">
-        <div className="container">
-          <Link to="/" className="brand-logo">Nutri App</Link>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            {!user && (
-              <li><button className="waves-effect waves-teal btn-flat white-text" onClick={handleLoginClick}>Join now</button></li>
-            )}
-            {user && (
+    <header className='navbar bg-primary'>
+
+      <div className="container-fluid">
+
+        <Link to="/" className="nav-link">Nutri App</Link>
+
+        {!user && (
+          <button className="btn btn-light text-dark me-2" onClick={handleLoginClick}>Join now</button>
+        )}
+
+        {user && (
+          <div className="flex-shrink-0 dropdown">
+            <Link to="/dashboard" className='d-block link-body-emphasis text-decoration-none dropdown-toggle show'>
+              <img src={user.photoURL} alt="avatar" referrerPolicy='no-referrer' className='rounded-circle' width="32" height="32" />
+            </Link>
+            <ul
+              className="dropdown-menu text-small shadow"
+              data-popper-placement="bottom-end"
+              style={{
+                position: "absolute",
+                inset: "0px 0px auto auto",
+                margin: "0px",
+                transform: "translate3d(0px, 34.4px, 0px)"
+              }}
+            >
               <li>
-                <Link to="/dashboard">
-                  <img src={user.photoURL} alt="avatar" referrerPolicy='no-referrer' className='circle responsive-img avatar-img' />
-                </Link>
+                one
               </li>
-            )}
-          </ul>
-        </div>
+              <li>
+                one
+              </li>
+            </ul>
+          </div>
+
+        )}
+
 
       </div>
-    </nav>
+
+    </header>
   );
 }
 
