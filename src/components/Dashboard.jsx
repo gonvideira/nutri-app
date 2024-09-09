@@ -1,49 +1,52 @@
-import { React, useContext } from 'react';
+import { React, useContext, useEffect } from 'react';
 import { auth } from '../utilities/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../utilities/context';
+import useSignOut from '../utilities/handleSignOut';
+import ClientsList from './ClientsList';
 
 const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   const { userData } = useContext(UserContext);
+  const signOut = useSignOut();
+
+  // Redirect if not logged in
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/login");
+    }
+  }, [user, loading, navigate]);
 
   if (loading) return <h5>Loading...</h5>;
-  if (!user) {
-    navigate("/login"); // Redirect if no user
-    return null; // Prevent rendering anything else
-  }
-
-  const handleSignOut = async () => {
-    try {
-      await auth.signOut();
-      navigate("/"); // Redirect to home after sign out
-    } catch (error) {
-      console.error("Error signing out: ", error);
-    }
-  };
 
   return (
     <>
       <h3>Dashboard</h3>
-      {userData ? (
-        <div className="container">
-          <p><strong>Record ID:</strong> {userData.id}</p>
-          <p><strong>Name:</strong> {userData.fields?.Name}</p>
-          <p><strong>Email:</strong> {userData.fields?.Email}</p>
-          <p><strong>License:</strong> {userData.fields?.License}</p>
-          {/* Add more fields based on your Airtable data */}
-          <div className="section">
-            <div className="row">
-              <button className="waves-effect waves-light btn" onClick={handleSignOut}>
+      {!userData ? (
+        <>
+          <p>Loading user data...</p>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">{userData.fields?.Name}</h5>
+              <h6 className="card-subtitle mb-2 text-body-secondary">Record ID: {userData.id}</h6>
+              <p className="card-text"><strong>Email:</strong> {userData.fields?.Email}</p>
+              <p className="card-text"><strong>License:</strong> {userData.fields?.License}</p>
+              {/* Add more fields based on your Airtable data */}
+              <button className="btn btn-primary" onClick={signOut}>
                 Sign out
               </button>
             </div>
           </div>
-        </div>
-      ) : (
-        <p>Loading user data...</p>
+          <ClientsList recordId={userData.id} />
+        </>
       )}
     </>
   );

@@ -1,11 +1,15 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import { auth } from '../utilities/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { UserContext } from '../utilities/context';
 import { useNavigate, Link } from 'react-router-dom';
+import useSignOut from '../utilities/handleSignOut';
 
 function Navbar() {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const signOut = useSignOut();
+  const { userData } = useContext(UserContext);
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -18,40 +22,29 @@ function Navbar() {
 
         <Link to="/" className="nav-link">Nutri App</Link>
 
-        {!user && (
+        {(!user || !userData) && (
           <button className="btn btn-light text-dark me-2" onClick={handleLoginClick}>Join now</button>
         )}
 
-        {user && (
-          <div className="flex-shrink-0 dropdown">
-            <Link to="/dashboard" className='d-block link-body-emphasis text-decoration-none dropdown-toggle show'>
+        {user && userData && (
+
+          <>
+            <button className="waves-effect waves-light btn" onClick={signOut}>
+              Sign out
+            </button>
+            <Link to="/dashboard" className='d-block link-body-emphasis text-decoration-none'>
               <img src={user.photoURL} alt="avatar" referrerPolicy='no-referrer' className='rounded-circle' width="32" height="32" />
             </Link>
-            <ul
-              className="dropdown-menu text-small shadow"
-              data-popper-placement="bottom-end"
-              style={{
-                position: "absolute",
-                inset: "0px 0px auto auto",
-                margin: "0px",
-                transform: "translate3d(0px, 34.4px, 0px)"
-              }}
-            >
-              <li>
-                one
-              </li>
-              <li>
-                one
-              </li>
-            </ul>
-          </div>
+
+          </>
+
 
         )}
 
 
       </div>
 
-    </header>
+    </header >
   );
 }
 

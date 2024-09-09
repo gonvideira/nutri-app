@@ -1,4 +1,4 @@
-import {React, useContext} from "react";
+import { React, useContext, useState } from "react";
 import { GrGoogle } from "react-icons/gr";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // To navigate after login
@@ -10,8 +10,11 @@ function Login() {
   const { setUserData } = useContext(UserContext);
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
 
   const GoogleLogin = async () => {
+    setLoading(true); // Start loading when login starts
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
@@ -41,33 +44,38 @@ function Login() {
         console.log("New user created in Airtable:", newRecord.getId());
         setUserData(newRecord);
       }
+      setLoading(false); // Stop loading after operations are done
       navigate('/dashboard');
     } catch (error) {
       console.log(`Error: ${error}`);
+      setLoading(false); // Stop loading if there's an error
     }
   }
 
   return (
     <>
-      <h3>Join us today!</h3>
-      <h5>Sign in with one of the options below:</h5>
-      <div className="section">
-        <div className="row">
-          <button className="waves-effect waves-light btn" onClick={GoogleLogin}>
-            <GrGoogle /> Sign in with Google
-          </button>
-        </div>
-        <div className="row">
-          <button className="waves-effect waves-light btn">
-            Sign in with ...
-          </button>
-        </div>
-        <div className="row">
-          <button className="waves-effect waves-light btn">
-            Sign in with ...
-          </button>
+      <div className="container">
+        <h3>Join us today!</h3>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Sign in with one of the options below:</h5>
+            {loading ? (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              <>
+                <button type="button" className="btn" onClick={GoogleLogin}>
+                  <GrGoogle /> Sign in with Google
+                </button>
+              </>
+            )}
+
+
+          </div>
         </div>
       </div>
+
     </>
   );
 }
